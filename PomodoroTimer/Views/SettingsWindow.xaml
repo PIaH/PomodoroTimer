@@ -1,0 +1,219 @@
+﻿<Window x:Class="PomodoroTimer.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="de-DE"
+        lex:ResxLocalizationProvider.DefaultAssembly="PomodoroTimer"
+        lex:ResxLocalizationProvider.DefaultDictionary="lang"
+        Title="{lex:Loc SETTINGS}"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="WidthAndHeight">
+
+    <Window.Resources>
+
+        <!-- Button -->
+        <Style TargetType="Button">
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="Foreground"
+                    Value="DarkRed" />
+            <Setter Property="FontFamily"
+                    Value="Segoe UI Light" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Padding"
+                    Value="5" />
+        </Style>
+
+        <!-- TextBlock -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="Foreground"
+                    Value="DarkRed" />
+            <Setter Property="FontFamily"
+                    Value="Segoe UI Light" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="Padding"
+                    Value="5" />
+        </Style>
+
+        <!-- Headline TextBlock -->
+        <Style TargetType="TextBlock"
+               x:Key="HeadlineStyle">
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="Foreground"
+                    Value="DarkRed" />
+            <Setter Property="FontFamily"
+                    Value="Segoe UI Semibold" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Padding"
+                    Value="5" />
+        </Style>
+
+        <!-- Textbox -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="Foreground"
+                    Value="Black" />
+            <Setter Property="FontFamily"
+                    Value="Segoe UI" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Padding"
+                    Value="5" />
+            <Setter Property="MaxLength"
+                    Value="2" />
+            <Setter Property="Width"
+                    Value="40" />
+
+        </Style>
+
+        <!-- Symbol / Icon Style -->
+        <Style x:Key="SymbolStyle"
+               TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="../Assets/Fonts/#Segoe MDL2 Assets" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Foreground"
+                    Value="DarkRed" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal">
+            <TextBlock Text="&#xe713;"
+                       Style="{StaticResource SymbolStyle}"
+                       Margin="0 0 5 0" />
+            <TextBlock Text="{lex:Loc SETTINGS}"
+                       Style="{StaticResource HeadlineStyle}" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition  Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Text="{lex:Loc DURATIONS}"
+                       Style="{StaticResource HeadlineStyle}" />
+
+            <!-- Pomodoro -->
+
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Text="{lex:Loc POMODORO}" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Text="{Binding PomodoroMinutes, FallbackValue=00, StringFormat={}{0,2:D2}}" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="2"
+                       Text=":" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="3"
+                     Text="{Binding PomodoroSeconds, FallbackValue=30, StringFormat={}{0,2:D2}}" />
+
+            <!-- Short Break -->
+
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       Text="{lex:Loc SHORT_BREAK}" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     Text="{Binding ShortBreakMinutes, FallbackValue=00, StringFormat={}{0,2:D2}}" />
+            <TextBlock Grid.Row="2"
+                       Grid.Column="2"
+                       Text=":" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="3"
+                     Text="{Binding ShortBreakSeconds, FallbackValue=30, StringFormat={}{0,2:D2}}" />
+
+            <!-- Long Break -->
+
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Text="{lex:Loc LONG_BREAK}" />
+            <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     Text="{Binding LongBreakMinutes, FallbackValue=00, StringFormat={}{0,2:D2}}" />
+            <TextBlock Grid.Row="3"
+                       Grid.Column="2"
+                       Text=":" />
+            <TextBox Grid.Row="3"
+                     Grid.Column="3"
+                     Text="{Binding LongBreakSeconds, FallbackValue=30, StringFormat={}{0,2:D2}}" />
+
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       Text="{lex:Loc COMMON}"
+                       Style="{StaticResource HeadlineStyle}" />
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="1"
+                       Text="{lex:Loc LANGUAGE}" />
+
+            <ComboBox Grid.Column="1"
+                      Grid.Row="1"
+                      ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding Language}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Text="{Binding .}" Foreground="DarkRed" FontSize="16" Background="Transparent" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="3"
+              Margin="0 10 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Content="{lex:Loc CANCEL}"
+                    Command="{Binding CancelCommand}" />
+            <Button Grid.Column="1"
+                    Content="{lex:Loc APPLY}"
+                    Command="{Binding SaveCommand}" />
+        </Grid>
+    </Grid>
+</Window>
