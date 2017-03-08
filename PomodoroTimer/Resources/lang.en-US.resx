@@ -132,6 +132,9 @@
   <data name="DURATIONS" xml:space="preserve">
     <value>Durations</value>
   </data>
+  <data name="EXTERNAL_PROGRAM" xml:space="preserve">
+    <value>External Application</value>
+  </data>
   <data name="FINISHED" xml:space="preserve">
     <value>finished</value>
   </data>
@@ -158,5 +161,8 @@
   </data>
   <data name="SHORT_BREAK" xml:space="preserve">
     <value>Short Break</value>
+  </data>
+  <data name="SOUND" xml:space="preserve">
+    <value>Sound</value>
   </data>
 </root>

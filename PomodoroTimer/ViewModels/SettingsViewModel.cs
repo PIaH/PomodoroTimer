@@ -14,6 +14,8 @@ namespace PomodoroTimer.ViewModels
         {
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
+            SelectSoundCommand = new RelayCommand(SelectSound);
+            SelectExternalProgramCommand = new RelayCommand(SelectExternalProgram);
 
             var settings = Settings.Instance.Load();
             PomodoroMinutes = settings.PomodoroMinutes;
@@ -30,6 +32,9 @@ namespace PomodoroTimer.ViewModels
             Languages.Add(SupportedLanguages.German);
             Languages.Add(SupportedLanguages.English);
             Language = Languages.FirstOrDefault(l => l.Equals(settings.Language));
+
+            SelectedSound = settings.Sound;
+            SelectedExternalProgram = settings.ExternalProgram;
         }
 
         #endregion
@@ -38,6 +43,8 @@ namespace PomodoroTimer.ViewModels
 
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand SelectSoundCommand { get; set; }
+        public ICommand SelectExternalProgramCommand { get; set; }
 
         private int pomodoroMinutes;
         public int PomodoroMinutes
@@ -139,6 +146,34 @@ namespace PomodoroTimer.ViewModels
             }
         }
 
+        private string selectedExternalProgram;
+        public string SelectedExternalProgram
+        {
+            get
+            {
+                return selectedExternalProgram;
+            }
+            set
+            {
+                selectedExternalProgram = value;
+                NotifyPropertyChanged("SelectedExternalProgram");
+            }
+        }
+
+        private string selectedSound;
+        public string SelectedSound
+        {
+            get
+            {
+                return selectedSound;
+            }
+            set
+            {
+                selectedSound = value;
+                NotifyPropertyChanged("SelectedSound");
+            }
+        }
+
         public ObservableCollection<SupportedLanguage> Languages { get; set; }
 
         #endregion
@@ -160,9 +195,21 @@ namespace PomodoroTimer.ViewModels
                 ShortBreakMinutes = this.ShortBreakMinutes,
                 ShortBreakSeconds = this.ShortBreakSeconds,
                 PomodoroMinutes = this.PomodoroMinutes,
-                PomodoroSeconds = this.PomodoroSeconds
+                PomodoroSeconds = this.PomodoroSeconds,
+                ExternalProgram = this.SelectedExternalProgram,
+                Sound = this.SelectedSound
             });
             Navigator.Back();
+        }
+
+        private void SelectExternalProgram(object obj)
+        {
+
+        }
+
+        private void SelectSound(object obj)
+        {
+
         }
 
         #endregion

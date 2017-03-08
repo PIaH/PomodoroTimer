@@ -1,7 +1,11 @@
 ﻿using MvvmCommons.Core;
+using PomodoroTimer.Configuration;
 using PomodoroTimer.Tracking;
 using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace PomodoroTimer.ViewModels
 {
@@ -13,6 +17,8 @@ namespace PomodoroTimer.ViewModels
         private TimeSpan maxTimeSpan;
         private System.Timers.Timer timer;
         private string name;
+
+        public event Action<double> UpdateProgressValue;
 
         #endregion
 
@@ -27,6 +33,8 @@ namespace PomodoroTimer.ViewModels
             this.timer.Elapsed += delegate
             {
                 this.RemainingTimeSpan -= TimeSpan.FromSeconds(1);
+                double percentageValue = this.remainingTimeSpan.TotalSeconds / this.maxTimeSpan.TotalSeconds;
+                FireUpdateProgressValue(percentageValue);
                 if (this.RemainingTimeSpan == TimeSpan.FromSeconds(0) || this.RemainingTimeSpan < TimeSpan.FromSeconds(1))
                 {
                     this.timer.Enabled = false;
@@ -65,6 +73,7 @@ namespace PomodoroTimer.ViewModels
         {
             if (this.timer.Enabled == false)
             {
+                FireUpdateProgressValue(1);
                 this.Activate();
                 this.RemainingTimeSpan = this.maxTimeSpan;
                 this.timer.Enabled = true;
@@ -148,6 +157,24 @@ namespace PomodoroTimer.ViewModels
 
         private void Finished(bool success = true)
         {
+            if (success)
+            {
+                var settings = Settings.Instance.Load();
+                // Play sound if configured
+                if (settings.Sound != null)
+                {
+                    var player = new WindowsMediaPlayer();
+                    player.URL = settings.Sound;
+                    player.controls.currentPosition = 0;
+                    player.controls.play();
+                }
+                // Start external program if configured
+                if (settings.ExternalProgram != null)
+                {
+                    Process.Start(settings.ExternalProgram);
+                }
+            }
+            FireUpdateProgressValue(0);
             var finished = WPFLocalizeExtension.Extensions.LocTextExtension.GetLocalizedValue<string>("FINISHED");
             var interrupted = WPFLocalizeExtension.Extensions.LocTextExtension.GetLocalizedValue<string>("INTERRUPTED");
             var namevalue = WPFLocalizeExtension.Extensions.LocTextExtension.GetLocalizedValue<string>(name);
@@ -179,6 +206,13 @@ namespace PomodoroTimer.ViewModels
             }
         }
 
+        private void FireUpdateProgressValue(double value)
+        {
+            if (UpdateProgressValue != null)
+            {
+                UpdateProgressValue(value);
+            }
+        }
         #endregion
     }
 }

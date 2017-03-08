@@ -12,6 +12,7 @@
         Icon="/PomodoroTimer;component/Assets/pomodoro.ico"
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
+        TaskbarItemInfo="{Binding ItemInfo}"
         ResizeMode="NoResize">
     <Window.Resources>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />

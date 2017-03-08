@@ -12,6 +12,8 @@ namespace PomodoroTimer.Configuration
             ShortBreakSeconds = 0;
             LongBreakMinutes = 30;
             LongBreakSeconds = 0;
+            ExternalProgram = null;
+            Sound = null;
         }
 
         public SupportedLanguage Language { get; set; }
@@ -21,5 +23,7 @@ namespace PomodoroTimer.Configuration
         public int ShortBreakSeconds { get; set; }
         public int LongBreakMinutes { get; set; }
         public int LongBreakSeconds { get; set; }
+        public string ExternalProgram { get; set; }
+        public string Sound { get; set; }
     }
 }

@@ -3,7 +3,9 @@ using PomodoroTimer.Configuration;
 using PomodoroTimer.Tracking;
 using PomodoroTimer.Views;
 using System;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace PomodoroTimer.ViewModels
 {
@@ -18,6 +20,10 @@ namespace PomodoroTimer.ViewModels
             PomodoroViewModel.IsActive = true;
             SmallBreakViewModel = new TickingViewModel("SHORT_BREAK", TimeSpan.FromMinutes(3));
             BigBreakViewModel = new TickingViewModel("LONG_BREAK", TimeSpan.FromMinutes(30));
+            PomodoroViewModel.UpdateProgressValue += UpdateTaskbarProgress;
+            SmallBreakViewModel.UpdateProgressValue += UpdateTaskbarProgress;
+            BigBreakViewModel.UpdateProgressValue += UpdateTaskbarProgress;
+
             SettingsChanged(null, null); // This will load the configured timespans
 
             Predicate<object> nothingIsTicking = (o) =>
@@ -37,6 +43,10 @@ namespace PomodoroTimer.ViewModels
             ShowSettingsCommand = new RelayCommand(ShowSettings, nothingIsTicking);
 
             Settings.Instance.SettingsChanged += SettingsChanged;
+
+            ItemInfo = new System.Windows.Shell.TaskbarItemInfo();
+            ItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+            ItemInfo.ProgressValue = 0;
         }
 
         #endregion
@@ -61,6 +71,8 @@ namespace PomodoroTimer.ViewModels
         public TickingViewModel SmallBreakViewModel { get; set; }
 
         public TickingViewModel PomodoroViewModel { get; set; }
+
+        public System.Windows.Shell.TaskbarItemInfo ItemInfo { get; set; }
 
         #endregion
 
@@ -124,6 +136,13 @@ namespace PomodoroTimer.ViewModels
             Navigator.Show<SettingsWindow>(new SettingsViewModel(), true);
         }
 
+        private void UpdateTaskbarProgress(double progress)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ItemInfo.ProgressValue = progress;
+            });
+        }
 
         #endregion
     }

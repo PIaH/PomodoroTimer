@@ -68,8 +68,6 @@
                     Value="20" />
             <Setter Property="Padding"
                     Value="5" />
-            <Setter Property="MaxLength"
-                    Value="2" />
             <Setter Property="Width"
                     Value="40" />
 
@@ -132,12 +130,14 @@
                        Text="{lex:Loc POMODORO}" />
             <TextBox Grid.Row="1"
                      Grid.Column="1"
+                     MaxLength="2"
                      Text="{Binding PomodoroMinutes, FallbackValue=00, StringFormat={}{0,2:D2}}" />
             <TextBlock Grid.Row="1"
                        Grid.Column="2"
                        Text=":" />
             <TextBox Grid.Row="1"
                      Grid.Column="3"
+                     MaxLength="2"
                      Text="{Binding PomodoroSeconds, FallbackValue=30, StringFormat={}{0,2:D2}}" />
 
             <!-- Short Break -->
@@ -147,12 +147,14 @@
                        Text="{lex:Loc SHORT_BREAK}" />
             <TextBox Grid.Row="2"
                      Grid.Column="1"
+                     MaxLength="2"
                      Text="{Binding ShortBreakMinutes, FallbackValue=00, StringFormat={}{0,2:D2}}" />
             <TextBlock Grid.Row="2"
                        Grid.Column="2"
                        Text=":" />
             <TextBox Grid.Row="2"
                      Grid.Column="3"
+                     MaxLength="2"
                      Text="{Binding ShortBreakSeconds, FallbackValue=30, StringFormat={}{0,2:D2}}" />
 
             <!-- Long Break -->
@@ -162,12 +164,14 @@
                        Text="{lex:Loc LONG_BREAK}" />
             <TextBox Grid.Row="3"
                      Grid.Column="1"
+                     MaxLength="2"
                      Text="{Binding LongBreakMinutes, FallbackValue=00, StringFormat={}{0,2:D2}}" />
             <TextBlock Grid.Row="3"
                        Grid.Column="2"
                        Text=":" />
             <TextBox Grid.Row="3"
                      Grid.Column="3"
+                     MaxLength="2"
                      Text="{Binding LongBreakSeconds, FallbackValue=30, StringFormat={}{0,2:D2}}" />
 
         </Grid>
@@ -177,6 +181,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -196,10 +202,44 @@
                       SelectedItem="{Binding Language}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock  Text="{Binding .}" Foreground="DarkRed" FontSize="16" Background="Transparent" />
+                        <TextBlock  Text="{Binding .}"
+                                    Foreground="DarkRed"
+                                    FontSize="16"
+                                    Background="Transparent" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <TextBlock Grid.Column="0"
+                       Grid.Row="2"
+                       Text="{lex:Loc SOUND}" />
+
+            <StackPanel  Grid.Column="1"
+                         Grid.Row="2"
+                         Orientation="Horizontal">
+                <TextBox HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Width="100"
+                         Text="{Binding SelectedSound}" />
+                <Button Content="..."
+                        Margin="5 0 0 0"
+                        Command="{Binding SelectSoundCommand}" />
+            </StackPanel>
+            <TextBlock Grid.Column="0"
+                       Grid.Row="3"
+                       Text="{lex:Loc EXTERNAL_PROGRAM}" />
+
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        Grid.Row="3">
+                <TextBox HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Width="100"
+                         Text="{Binding SelectedExternalProgram}"/>
+                <Button Content="..."
+                        Margin="5 0 0 0"
+                        Command="{Binding SelectExternalProgramCommand}" />
+
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="3"
