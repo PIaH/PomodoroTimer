@@ -13,6 +13,10 @@
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
         TaskbarItemInfo="{Binding ItemInfo}"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Topmost="True"
+        WindowStyle="None"
         ResizeMode="NoResize">
     <Window.Resources>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -40,104 +44,110 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <Image Source="/PomodoroTimer;component/Assets/pomodoro.png"
+               Stretch="Fill"
+               StretchDirection="DownOnly"
+               MouseDown="Image_MouseDown"/>
+        <Grid Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Command="{Binding StartPomodoroCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="&#xe2ad;"
-                               Style="{StaticResource SymbolStyle}"
-                               Margin="0 0 5 0" />
-                    <TextBlock Text="{lex:Loc POMODORO}" />
-                </StackPanel>
-            </Button>
+                <Button Grid.Column="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Command="{Binding StartPomodoroCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xe2ad;"
+                                   Style="{StaticResource SymbolStyle}"
+                                   Margin="0 0 5 0" />
+                        <TextBlock Text="{lex:Loc POMODORO}" />
+                    </StackPanel>
+                </Button>
 
-            <Button Grid.Column="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Command="{Binding StartSmallBreakCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="&#xea91;"
-                               Style="{StaticResource SymbolStyle}"
-                               Margin="0 0 5 0" />
-                    <TextBlock Text="{lex:Loc SHORT_BREAK}" />
-                </StackPanel>
-            </Button>
+                <Button Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Command="{Binding StartSmallBreakCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xea91;"
+                                   Style="{StaticResource SymbolStyle}"
+                                   Margin="0 0 5 0" />
+                        <TextBlock Text="{lex:Loc SHORT_BREAK}" />
+                    </StackPanel>
+                </Button>
 
-            <Button Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Command="{Binding StartBigBreakCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="&#xed56;"
-                               Style="{StaticResource SymbolStyle}"
-                               Margin="0 0 5 0" />
-                    <TextBlock Text="{lex:Loc LONG_BREAK}" />
-                </StackPanel>
-            </Button>
-        </Grid>
+                <Button Grid.Column="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Command="{Binding StartBigBreakCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xed56;"
+                                   Style="{StaticResource SymbolStyle}"
+                                   Margin="0 0 5 0" />
+                        <TextBlock Text="{lex:Loc LONG_BREAK}" />
+                    </StackPanel>
+                </Button>
+            </Grid>
 
-        <Grid Grid.Row="1"
-              VerticalAlignment="Stretch"
-              HorizontalAlignment="Stretch"
-              Background="DarkGray">
-            <Views:RegularUnitControl DataContext="{Binding PomodoroViewModel}"
-                                      Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visible}" />
-            <Views:SmallBreakUnitControl DataContext="{Binding SmallBreakViewModel}"
-                                         Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}" />
-            <Views:BigBreakUnitControl DataContext="{Binding BigBreakViewModel}"
-                                       Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}" />
-        </Grid>
+            <Grid Grid.Row="1"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  Background="DarkGray">
+                <Views:RegularUnitControl DataContext="{Binding PomodoroViewModel}"
+                                          Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visible}" />
+                <Views:SmallBreakUnitControl DataContext="{Binding SmallBreakViewModel}"
+                                             Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}" />
+                <Views:BigBreakUnitControl DataContext="{Binding BigBreakViewModel}"
+                                           Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}" />
+            </Grid>
 
-        <Grid Grid.Row="2">
-            <Button Command="{Binding InterruptCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{lex:Loc INTERRUPT}" />
-                    <TextBlock Text="&#xeb97;"
-                               Style="{StaticResource SymbolStyle}"
-                               Margin="5 0 0 0" />
-                </StackPanel>
+            <Grid Grid.Row="2">
+                <Button Command="{Binding InterruptCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc INTERRUPT}" />
+                        <TextBlock Text="&#xeb97;"
+                                   Style="{StaticResource SymbolStyle}"
+                                   Margin="5 0 0 0" />
+                    </StackPanel>
 
-            </Button>
-        </Grid>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"
-                    Command="{Binding ShowHistoryCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="&#xee92;"
-                               Style="{StaticResource SymbolStyle}"
-                               Margin="0 0 5 0" />
-                    
-                    <TextBlock Text="{lex:Loc HISTORY}" />
-                    <TextBlock Text="{Binding PomodoroViewModel.SuccessfullUnitsOfToday, StringFormat= ({0}), FallbackValue=(0)}" />
-                </StackPanel>
-            </Button>
-            <Button Grid.Column="1"
-                    Command="{Binding ShowSettingsCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="&#xe713;"
-                               Style="{StaticResource SymbolStyle}"
-                               Margin="0 0 5 0" />
-                    <TextBlock Text="{lex:Loc SETTINGS}" />
-                </StackPanel>
-            </Button>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Command="{Binding ShowHistoryCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xee92;"
+                                   Style="{StaticResource SymbolStyle}"
+                                   Margin="0 0 5 0" />
+
+                        <TextBlock Text="{lex:Loc HISTORY}" />
+                        <TextBlock Text="{Binding PomodoroViewModel.SuccessfullUnitsOfToday, StringFormat= ({0}), FallbackValue=(0)}" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="1"
+                        Command="{Binding ShowSettingsCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xe713;"
+                                   Style="{StaticResource SymbolStyle}"
+                                   Margin="0 0 5 0" />
+                        <TextBlock Text="{lex:Loc SETTINGS}" />
+                    </StackPanel>
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

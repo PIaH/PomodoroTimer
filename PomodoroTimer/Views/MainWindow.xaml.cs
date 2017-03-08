@@ -12,5 +12,10 @@ namespace PomodoroTimer.Views
             InitializeComponent();
 
         }
+
+        private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }
