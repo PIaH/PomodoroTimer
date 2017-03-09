@@ -1,5 +1,8 @@
 ﻿using MvvmCommons.Core;
 using PomodoroTimer.Configuration;
+using PomodoroTimer.Dialogs;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -35,6 +38,8 @@ namespace PomodoroTimer.ViewModels
 
             SelectedSound = settings.Sound;
             SelectedExternalProgram = settings.ExternalProgram;
+
+            IsTopMost = settings.IsTopMost;
         }
 
         #endregion
@@ -174,6 +179,21 @@ namespace PomodoroTimer.ViewModels
             }
         }
 
+        private bool isTopMost;
+        public bool IsTopMost
+        {
+            get
+            {
+                return isTopMost;
+            }
+            set
+            {
+                isTopMost = value;
+                NotifyPropertyChanged("IsTopMost");
+            }
+        }
+
+
         public ObservableCollection<SupportedLanguage> Languages { get; set; }
 
         #endregion
@@ -197,19 +217,42 @@ namespace PomodoroTimer.ViewModels
                 PomodoroMinutes = this.PomodoroMinutes,
                 PomodoroSeconds = this.PomodoroSeconds,
                 ExternalProgram = this.SelectedExternalProgram,
-                Sound = this.SelectedSound
+                Sound = this.SelectedSound,
+                IsTopMost = this.IsTopMost
             });
             Navigator.Back();
         }
 
         private void SelectExternalProgram(object obj)
         {
-
+            var dialog = new SelectFileDialog
+            {
+                FileExtensionsFilter = new List<string> { ".exe", ".bat", ".sh" },
+                StartupDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                CheckIfExists = true,
+                Title = WPFLocalizeExtension.Extensions.LocTextExtension.GetLocalizedValue<string>("SELECT_PROGRAM_DLG_TITLE")
+            };
+            string file = null;
+            if (dialog.SelectFile(out file))
+            {
+                SelectedExternalProgram = file;
+            }
         }
 
         private void SelectSound(object obj)
         {
-
+            var dialog = new SelectFileDialog
+            {
+                FileExtensionsFilter = new List<string> { ".mp3", ".wav" },
+                StartupDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
+                CheckIfExists = true,
+                Title = WPFLocalizeExtension.Extensions.LocTextExtension.GetLocalizedValue<string>("SELECT_SOUND_DLG_TITLE")
+            };
+            string file = null;
+            if (dialog.SelectFile(out file))
+            {
+                SelectedSound = file;
+            }
         }
 
         #endregion

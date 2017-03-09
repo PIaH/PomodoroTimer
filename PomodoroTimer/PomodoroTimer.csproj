@@ -79,6 +79,7 @@
     <Compile Include="Configuration\SettingsEntity.cs" />
     <Compile Include="Configuration\SupportedLanguage.cs" />
     <Compile Include="Configuration\SupportedLanguages.cs" />
+    <Compile Include="Dialogs\SelectFileDialog.cs" />
     <Compile Include="Resources\lang.de-DE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

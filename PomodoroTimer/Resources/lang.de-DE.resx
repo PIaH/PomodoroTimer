@@ -138,6 +138,9 @@
   <data name="FINISHED" xml:space="preserve">
     <value>abgeschlossen</value>
   </data>
+  <data name="FOREGROUND" xml:space="preserve">
+    <value>Immer im Vordergrund</value>
+  </data>
   <data name="HISTORY" xml:space="preserve">
     <value>Bericht</value>
   </data>
@@ -155,6 +158,15 @@
   </data>
   <data name="POMODORO" xml:space="preserve">
     <value>Pomodoro</value>
+  </data>
+  <data name="POMODORO_FINISHED" xml:space="preserve">
+    <value>Aktionen beim Abschluss eines Pomodoros</value>
+  </data>
+  <data name="SELECT_PROGRAM_DLG_TITLE" xml:space="preserve">
+    <value>Bitte wählen Sie eine Anwendung aus</value>
+  </data>
+  <data name="SELECT_SOUND_DLG_TITLE" xml:space="preserve">
+    <value>Bitte wählen Sie eine Musik-Datei aus</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Einstellungen</value>

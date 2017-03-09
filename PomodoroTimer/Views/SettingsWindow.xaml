@@ -9,7 +9,8 @@
         WindowStyle="ToolWindow"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        >
 
     <Window.Resources>
 
@@ -70,9 +71,22 @@
                     Value="5" />
             <Setter Property="Width"
                     Value="40" />
-
         </Style>
-
+        
+        <!-- Checkbox -->
+        <Style TargetType="CheckBox">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="Foreground"
+                    Value="Black" />
+            <Setter Property="FontFamily"
+                    Value="Segoe UI" />
+            <Setter Property="FontSize"
+                    Value="20" />
+        </Style>
+        
         <!-- Symbol / Icon Style -->
         <Style x:Key="SymbolStyle"
                TargetType="TextBlock">
@@ -93,6 +107,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0"
@@ -105,6 +120,50 @@
         </StackPanel>
 
         <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       Text="{lex:Loc COMMON}"
+                       Style="{StaticResource HeadlineStyle}" />
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="1"
+                       Text="{lex:Loc LANGUAGE}" />
+
+            <ComboBox Grid.Column="1"
+                      Grid.Row="1"
+                      ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding Language}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Text="{Binding .}"
+                                    Foreground="DarkRed"
+                                    FontSize="16"
+                                    Background="Transparent" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="2"
+                       Text="{lex:Loc FOREGROUND}" />
+
+            <CheckBox Grid.Column="1"
+                      Grid.Row="2"
+                      IsChecked="{Binding IsTopMost}" />
+        </Grid>
+
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition  Width="Auto" />
@@ -120,6 +179,7 @@
 
             <TextBlock Grid.Row="0"
                        Grid.Column="0"
+                       Grid.ColumnSpan="2"
                        Text="{lex:Loc DURATIONS}"
                        Style="{StaticResource HeadlineStyle}" />
 
@@ -175,7 +235,9 @@
                      Text="{Binding LongBreakSeconds, FallbackValue=30, StringFormat={}{0,2:D2}}" />
 
         </Grid>
-        <Grid Grid.Row="2">
+        
+
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -184,57 +246,41 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
-                <RowDefinition />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0"
                        Grid.Row="0"
-                       Text="{lex:Loc COMMON}"
+                       Grid.ColumnSpan="2"
+                       Text="{lex:Loc POMODORO_FINISHED}"
                        Style="{StaticResource HeadlineStyle}" />
 
             <TextBlock Grid.Column="0"
                        Grid.Row="1"
-                       Text="{lex:Loc LANGUAGE}" />
-
-            <ComboBox Grid.Column="1"
-                      Grid.Row="1"
-                      ItemsSource="{Binding Languages}"
-                      SelectedItem="{Binding Language}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock  Text="{Binding .}"
-                                    Foreground="DarkRed"
-                                    FontSize="16"
-                                    Background="Transparent" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBlock Grid.Column="0"
-                       Grid.Row="2"
                        Text="{lex:Loc SOUND}" />
 
             <StackPanel  Grid.Column="1"
-                         Grid.Row="2"
-                         Orientation="Horizontal">
+                         Grid.Row="1"
+                         Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
-                         Width="100"
+                         Width="200"
                          Text="{Binding SelectedSound}" />
                 <Button Content="..."
                         Margin="5 0 0 0"
                         Command="{Binding SelectSoundCommand}" />
             </StackPanel>
             <TextBlock Grid.Column="0"
-                       Grid.Row="3"
+                       Grid.Row="2"
                        Text="{lex:Loc EXTERNAL_PROGRAM}" />
 
             <StackPanel Grid.Column="1"
                         Orientation="Horizontal"
-                        Grid.Row="3">
+                        Grid.Row="2"
+                        HorizontalAlignment="Right">
                 <TextBox HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
-                         Width="100"
-                         Text="{Binding SelectedExternalProgram}"/>
+                         Width="200"
+                         Text="{Binding SelectedExternalProgram}" />
                 <Button Content="..."
                         Margin="5 0 0 0"
                         Command="{Binding SelectExternalProgramCommand}" />
@@ -242,7 +288,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="3"
+        <Grid Grid.Row="4"
               Margin="0 10 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

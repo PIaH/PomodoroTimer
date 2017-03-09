@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="PomodoroTimer.Views.SmallBreakUnitControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:clr="clr-namespace:System;assembly=mscorlib"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
@@ -74,24 +74,27 @@
     </UserControl.Resources>
 
     <!-- Actual Layout -->
-    <Grid Style="{StaticResource GridWrapperStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+    <Border BorderThickness="1 0 1 0"
+            BorderBrush="LightGray">
+        <Grid Style="{StaticResource GridWrapperStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
-                   Text="{lex:Loc SHORT_BREAK}"
-                   HorizontalAlignment="Center"
-                   Style="{StaticResource HeadlineStyle}" />
-        <Border Grid.Row="1"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Style="{StaticResource TickingWrapperStyle}">
-            <TextBlock Text="{Binding RemainingTimeSpan, FallbackValue=24:13, StringFormat=mm\\:ss}"
-                       VerticalAlignment="Center"
+            <TextBlock Grid.Row="0"
+                       Text="{lex:Loc SHORT_BREAK}"
                        HorizontalAlignment="Center"
-                       Style="{StaticResource TickingStyle}" />
-        </Border>
-    </Grid>
+                       Style="{StaticResource HeadlineStyle}" />
+            <Border Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource TickingWrapperStyle}">
+                <TextBlock Text="{Binding RemainingTimeSpan, FallbackValue=24:13, StringFormat=mm\\:ss}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource TickingStyle}" />
+            </Border>
+        </Grid>
+    </Border>
 </UserControl>

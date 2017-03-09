@@ -115,6 +115,15 @@ namespace PomodoroTimer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Always on top.
+        /// </summary>
+        internal static string FOREGROUND {
+            get {
+                return ResourceManager.GetString("FOREGROUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
         internal static string HISTORY {
@@ -169,6 +178,33 @@ namespace PomodoroTimer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions when a Pomodoro is completed.
+        /// </summary>
+        internal static string POMODORO_FINISHED {
+            get {
+                return ResourceManager.GetString("POMODORO_FINISHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an application.
+        /// </summary>
+        internal static string SELECT_PROGRAM_DLG_TITLE {
+            get {
+                return ResourceManager.GetString("SELECT_PROGRAM_DLG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a sound file.
+        /// </summary>
+        internal static string SELECT_SOUND_DLG_TITLE {
+            get {
+                return ResourceManager.GetString("SELECT_SOUND_DLG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string SETTINGS {
@@ -183,6 +219,15 @@ namespace PomodoroTimer.Resources {
         internal static string SHORT_BREAK {
             get {
                 return ResourceManager.GetString("SHORT_BREAK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound.
+        /// </summary>
+        internal static string SOUND {
+            get {
+                return ResourceManager.GetString("SOUND", resourceCulture);
             }
         }
     }

@@ -14,6 +14,7 @@ namespace PomodoroTimer.Configuration
             LongBreakSeconds = 0;
             ExternalProgram = null;
             Sound = null;
+            IsTopMost = false;
         }
 
         public SupportedLanguage Language { get; set; }
@@ -25,5 +26,6 @@ namespace PomodoroTimer.Configuration
         public int LongBreakSeconds { get; set; }
         public string ExternalProgram { get; set; }
         public string Sound { get; set; }
+        public bool IsTopMost { get; set; }
     }
 }

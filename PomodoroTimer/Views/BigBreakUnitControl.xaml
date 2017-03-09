@@ -74,24 +74,26 @@
     </UserControl.Resources>
 
     <!-- Actual Layout -->
-    <Grid Style="{StaticResource GridWrapperStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+    <Border BorderThickness="1 0 1 0" BorderBrush="LightGray">
+        <Grid Style="{StaticResource GridWrapperStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
-                   Text="{lex:Loc LONG_BREAK}"
-                   HorizontalAlignment="Center"
-                   Style="{StaticResource HeadlineStyle}" />
-        <Border Grid.Row="1"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Style="{StaticResource TickingWrapperStyle}">
-            <TextBlock Text="{Binding RemainingTimeSpan, FallbackValue=24:13, StringFormat=mm\\:ss}"
-                       VerticalAlignment="Center"
+            <TextBlock Grid.Row="0"
+                       Text="{lex:Loc LONG_BREAK}"
                        HorizontalAlignment="Center"
-                       Style="{StaticResource TickingStyle}" />
-        </Border>
-    </Grid>
+                       Style="{StaticResource HeadlineStyle}" />
+            <Border Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource TickingWrapperStyle}">
+                <TextBlock Text="{Binding RemainingTimeSpan, FallbackValue=24:13, StringFormat=mm\\:ss}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource TickingStyle}" />
+            </Border>
+        </Grid>
+    </Border>
 </UserControl>

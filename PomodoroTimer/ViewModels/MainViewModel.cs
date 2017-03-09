@@ -24,7 +24,7 @@ namespace PomodoroTimer.ViewModels
             SmallBreakViewModel.UpdateProgressValue += UpdateTaskbarProgress;
             BigBreakViewModel.UpdateProgressValue += UpdateTaskbarProgress;
 
-            SettingsChanged(null, null); // This will load the configured timespans
+            SettingsChanged(null, null); // This will load the configured timespans and updates topmost
 
             Predicate<object> nothingIsTicking = (o) =>
             {
@@ -41,12 +41,31 @@ namespace PomodoroTimer.ViewModels
             InterruptCommand = new RelayCommand(Interrupt, anyoneIsTicking);
             ShowHistoryCommand = new RelayCommand(ShowHistory);
             ShowSettingsCommand = new RelayCommand(ShowSettings, nothingIsTicking);
+            MinimizeCommand = new RelayCommand(Minimize);
+            QuitCommand = new RelayCommand(QuitApplication);
 
             Settings.Instance.SettingsChanged += SettingsChanged;
 
             ItemInfo = new System.Windows.Shell.TaskbarItemInfo();
             ItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
             ItemInfo.ProgressValue = 0;
+        }
+
+        private void QuitApplication(object obj)
+        {
+            if (InterruptCommand.CanExecute(null))
+            {
+                InterruptCommand.Execute(null);
+            }
+            Application.Current.Shutdown();
+        }
+
+        private void Minimize(object obj)
+        {
+            if (Application.Current.MainWindow.WindowState != WindowState.Minimized)
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            }
         }
 
         #endregion
@@ -65,6 +84,10 @@ namespace PomodoroTimer.ViewModels
 
         public ICommand ShowSettingsCommand { get; set; }
 
+        public ICommand MinimizeCommand { get; set; }
+
+        public ICommand QuitCommand { get; set; }
+
 
         public TickingViewModel BigBreakViewModel { get; set; }
 
@@ -73,6 +96,22 @@ namespace PomodoroTimer.ViewModels
         public TickingViewModel PomodoroViewModel { get; set; }
 
         public System.Windows.Shell.TaskbarItemInfo ItemInfo { get; set; }
+
+        private bool isTopMost;
+        public bool IsTopMost
+        {
+            get
+            {
+                return isTopMost;
+            }
+            set
+            {
+                isTopMost = value;
+                NotifyPropertyChanged("IsTopMost");
+            }
+        }
+
+
 
         #endregion
 
@@ -84,6 +123,7 @@ namespace PomodoroTimer.ViewModels
             PomodoroViewModel.UpdateMaxTimeSpan(TimeSpan.FromMinutes(settings.PomodoroMinutes).Add(TimeSpan.FromSeconds(settings.PomodoroSeconds)));
             BigBreakViewModel.UpdateMaxTimeSpan(TimeSpan.FromMinutes(settings.LongBreakMinutes).Add(TimeSpan.FromSeconds(settings.LongBreakSeconds)));
             SmallBreakViewModel.UpdateMaxTimeSpan(TimeSpan.FromMinutes(settings.ShortBreakMinutes).Add(TimeSpan.FromSeconds(settings.ShortBreakSeconds)));
+            IsTopMost = settings.IsTopMost;
         }
 
         private void Interrupt(object o = null)
