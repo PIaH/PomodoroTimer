@@ -30,13 +30,12 @@ msbuild -t:Clean,Build
 ```
 
 ## Screenshots
+<img alt="The Main Screen, where can access all functions" title="The Main Screen, where can access all functions" src="https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_01.png" height="250" />
 
-![The Main Screen, where can access all functions](https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_01.png)
+<img alt="The Settings screen" title="The Settings screen" src="https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_02.png" height="300" />
 
-![The Settings screen](https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_02.png)
+<img alt="The history that is rendered into the browser" title="The history that is rendered into the browser" src="https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_03.png" height="350" />
 
-![The history that is rendered into the browser](https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_03.png)
+<img alt="The notification when you had to interrupt your Pomodoro" title="The notification when you had to interrupt your Pomodoro" src="https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_04.png" height="80" />
 
-![The notification when you had to interrupt your Pomodoro](https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_04.png)
-
-![The progress of the remaining time in the taskbar icon](https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_05.png)
+<img alt="The progress of the remaining time in the taskbar icon" title="The progress of the remaining time in the taskbar icon" src="https://raw.githubusercontent.com/piah/pomodorotimer/master/PomodoroTimer.Docs/screenshot_05.png" height="50" />
